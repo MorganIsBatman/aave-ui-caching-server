@@ -1,13 +1,16 @@
 import Redis from 'ioredis';
-import { REDIS_HOST } from '../config';
 
-export const getRedis = () =>
-  new Redis({
-    host: REDIS_HOST || 'redis',
+export const getRedis = () => {
+
+  const { env } = process;
+  return new Redis(parseInt(env.REDIS_PORT), env.REDIS_HOST, {
+    password: env.REDIS_PASSWORD,
     retryStrategy(times): number {
       return Math.max(times * 100, 3000);
-    },
+    }
   });
+}
+
 
 const cacheRedis = getRedis();
 

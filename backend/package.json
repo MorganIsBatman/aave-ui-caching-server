@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": false,
   "scripts": {
-    "start": "npm i && nodemon",
+    "start": "nodemon",
     "test": "jest --runInBand --detectOpenHandles",
     "prod": "ts-node ./src/api.ts",
     "job:update-block-number": "ts-node ./src/tasks/update-block-number/run.ts",
@@ -20,6 +20,7 @@
     "@alch/alchemy-web3": "^1.1.9",
     "apollo-server-express": "^3.5.0",
     "class-validator": "^0.13.2",
+    "dotenv": "^11.0.0",
     "ethers": "^5.5.2",
     "express": "^4.17.1",
     "graphql": "^15.5.0",

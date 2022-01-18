@@ -1,6 +1,15 @@
+import dotenv from "dotenv";
 import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
+import * as WebSocket from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
 import 'reflect-metadata';
 import { buildSchema, NonEmptyArray } from 'type-graphql';
+
+// pull the .env file into our process.env before other imports
+// as some of our imported files read process.env:
+dotenv.config();
+
 import {
   HealthResolver,
   ProtocolDataResolver,
@@ -9,11 +18,11 @@ import {
 } from './graphql/resolvers';
 import { getPubSub } from './pubsub';
 import { isStakeEnabled } from './tasks/task-helpers';
-import express from 'express';
-import * as WebSocket from 'ws';
-import { useServer } from 'graphql-ws/lib/use/ws';
 
-const PORT = process.env.PORT || 3000;
+
+
+
+const PORT = process.env.PORT || 4000;
 
 async function bootstrap() {
   const resolvers: NonEmptyArray<Function> | NonEmptyArray<string> = isStakeEnabled()
