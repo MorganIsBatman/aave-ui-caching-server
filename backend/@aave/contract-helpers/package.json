@@ -1,0 +1,43 @@
+{
+  "name": "@aave/contract-helpers",
+  "version": "0.27.2-441376d630df05a48a2f56b84b928c01b07f7f1c.0+441376d",
+  "license": "MIT",
+  "description": "",
+  "scripts": {
+    "clean": "cd ../.. && npx rimraf packages/contract-helpers/dist packages/math-utils/*.log*",
+    "lint": "cd ../.. && eslint packages/contract-helpers/src/**/*.ts",
+    "check-types": "yarn build -- --noEmit",
+    "prebuild": "npm run clean",
+    "build": "cd ../.. && tsc -p packages/contract-helpers/tsconfig.json && tsc -p packages/contract-helpers/tsconfig.json --module commonjs --outDir ./packages/contract-helpers/dist/cjs",
+    "test": "cd ../.. && yarn test packages/contract-helpers",
+    "cover": "cd ../.. && yarn cover packages/contract-helpers",
+    "commit": "cd ../.. && yarn commit",
+    "prepublishOnly": "yarn build"
+  },
+  "peerDependencies": {
+    "ethers": "^5.4.7"
+  },
+  "devDependencies": {
+    "ethers": "5.4.7",
+    "reflect-metadata": "^0.1.13"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/@aave/aave-utilities.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/@aave/aave-utilities/issues"
+  },
+  "homepage": "https://github.com/@aave/aave-utilities#readme",
+  "gitHead": "441376d630df05a48a2f56b84b928c01b07f7f1c",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "isomorphic-unfetch": "^3.1.0"
+  }
+}

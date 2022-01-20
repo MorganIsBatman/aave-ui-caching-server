@@ -56,12 +56,13 @@ export const getProtocolUserDataRPC = async (
   }: { userReserves: UserReserveDataHumanized[]; userEmodeCategoryId: number } =
     await uiPoolProvider.getUserReservesHumanized(lendingPoolAddressProvider, userAddress);
 
-  const userReservesFiltered: UserReserveData[] = userReservesUnfiltered.filter(
+  const userReservesFiltered: UserReserveData[] = userReservesUnfiltered; /*.filter(
     (userReserve) =>
       userReserve.scaledATokenBalance !== '0' ||
       userReserve.scaledVariableDebt !== '0' ||
       userReserve.principalStableDebt !== '0'
   );
+  */
 
   return { userReserves: userReservesFiltered, userEmodeCategoryId };
 };

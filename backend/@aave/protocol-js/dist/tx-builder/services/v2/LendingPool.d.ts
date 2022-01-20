@@ -1,0 +1,30 @@
+import { ILendingPool } from '../../contract-types';
+import IERC20ServiceInterface from '../../interfaces/ERC20';
+import SynthetixInterface from '../../interfaces/Synthetix';
+import LendingPoolInterface from '../../interfaces/v2/LendingPool';
+import { Configuration, EthereumTransactionTypeExtended, Market } from '../../types';
+import { LPBorrowParamsType, LPDepositParamsType, LPLiquidationCall, LPRepayParamsType, LPRepayWithCollateral, LPSetUsageAsCollateral, LPSwapBorrowRateMode, LPSwapCollateral, LPWithdrawParamsType, LPFlashLiquidation } from '../../types/LendingPoolMethodTypes';
+import WETHGatewayInterface from '../../interfaces/WETHGateway';
+import LiquiditySwapAdapterInterface from '../../interfaces/LiquiditySwapAdapterParaswap';
+import RepayWithCollateralAdapterInterface from '../../interfaces/RepayWithCollateralAdapter';
+import BaseService from '../BaseService';
+export default class LendingPool extends BaseService<ILendingPool> implements LendingPoolInterface {
+    readonly market: Market;
+    readonly erc20Service: IERC20ServiceInterface;
+    readonly lendingPoolAddress: string;
+    readonly synthetixService: SynthetixInterface;
+    readonly wethGatewayService: WETHGatewayInterface;
+    readonly liquiditySwapAdapterService: LiquiditySwapAdapterInterface;
+    readonly repayWithCollateralAdapterService: RepayWithCollateralAdapterInterface;
+    constructor(config: Configuration, erc20Service: IERC20ServiceInterface, synthetixService: SynthetixInterface, wethGatewayService: WETHGatewayInterface, liquiditySwapAdapterService: LiquiditySwapAdapterInterface, repayWithCollateralAdapterService: RepayWithCollateralAdapterInterface, market: Market);
+    deposit({ user, reserve, amount, onBehalfOf, referralCode }: LPDepositParamsType): Promise<EthereumTransactionTypeExtended[]>;
+    withdraw({ user, reserve, amount, onBehalfOf, aTokenAddress }: LPWithdrawParamsType): Promise<EthereumTransactionTypeExtended[]>;
+    borrow({ user, reserve, amount, interestRateMode, debtTokenAddress, onBehalfOf, referralCode, }: LPBorrowParamsType): Promise<EthereumTransactionTypeExtended[]>;
+    repay({ user, reserve, amount, interestRateMode, onBehalfOf }: LPRepayParamsType): Promise<EthereumTransactionTypeExtended[]>;
+    swapBorrowRateMode({ user, reserve, interestRateMode }: LPSwapBorrowRateMode): Promise<EthereumTransactionTypeExtended[]>;
+    setUsageAsCollateral({ user, reserve, usageAsCollateral }: LPSetUsageAsCollateral): Promise<EthereumTransactionTypeExtended[]>;
+    liquidationCall({ liquidator, liquidatedUser, debtReserve, collateralReserve, purchaseAmount, getAToken, liquidateAll, }: LPLiquidationCall): Promise<EthereumTransactionTypeExtended[]>;
+    swapCollateral({ user, flash, fromAsset, fromAToken, toAsset, fromAmount, minToAmount, permitSignature, swapAll, onBehalfOf, referralCode, augustus, swapCallData, }: LPSwapCollateral): Promise<EthereumTransactionTypeExtended[]>;
+    repayWithCollateral({ user, fromAsset, fromAToken, assetToRepay, repayWithAmount, repayAmount, permitSignature, repayAllDebt, rateMode, onBehalfOf, referralCode, flash, useEthPath, }: LPRepayWithCollateral): Promise<EthereumTransactionTypeExtended[]>;
+    flashLiquidation({ user, collateralAsset, borrowedAsset, debtTokenCover, liquidateAll, initiator, useEthPath, }: LPFlashLiquidation): Promise<EthereumTransactionTypeExtended[]>;
+}

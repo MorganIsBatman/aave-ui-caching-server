@@ -1,0 +1,13 @@
+import BigNumber from 'bignumber.js';
+import { BigNumberValue } from './bignumber';
+export declare const LTV_PRECISION = 4;
+export declare function calculateCompoundedInterest(rate: BigNumberValue, currentTimestamp: number, lastUpdateTimestamp: number): BigNumber;
+export declare function getCompoundedBalance(_principalBalance: BigNumberValue, _reserveIndex: BigNumberValue, _reserveRate: BigNumberValue, _lastUpdateTimestamp: number, currentTimestamp: number): BigNumber;
+export declare const calculateLinearInterest: (rate: BigNumberValue, currentTimestamp: number, lastUpdateTimestamp: number) => BigNumber;
+export declare function getReserveNormalizedIncome(rate: BigNumberValue, index: BigNumberValue, lastUpdateTimestamp: number, currentTimestamp: number): BigNumber;
+export declare function getLinearBalance(balance: BigNumberValue, index: BigNumberValue, rate: BigNumberValue, lastUpdateTimestamp: number, currentTimestamp: number): BigNumber;
+export declare function getCompoundedStableBalance(_principalBalance: BigNumberValue, _userStableRate: BigNumberValue, _lastUpdateTimestamp: number, currentTimestamp: number): BigNumber;
+export declare function calculateHealthFactorFromBalances(collateralBalanceETH: BigNumberValue, borrowBalanceETH: BigNumberValue, currentLiquidationThreshold: BigNumberValue): BigNumber;
+export declare function calculateHealthFactorFromBalancesBigUnits(collateralBalanceETH: BigNumberValue, borrowBalanceETH: BigNumberValue, currentLiquidationThreshold: BigNumberValue): BigNumber;
+export declare function calculateAvailableBorrowsETH(collateralBalanceETH: BigNumberValue, borrowBalanceETH: BigNumberValue, currentLtv: BigNumberValue): BigNumber;
+export declare function calculateAverageRate(index0: string, index1: string, timestamp0: number, timestamp1: number): string;
